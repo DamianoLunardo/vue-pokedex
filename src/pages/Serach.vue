@@ -2,22 +2,32 @@
 import axios from 'axios';
 import { ref } from 'vue';
 
-// La variabile search la definiamo come riferimento con ref e inizializzata a un valore vuoto
-const search = ref('');
-// Gestiamo il caso in cui il nome del Pokémon non esiste
-const errorMessage = ref('');
-// Variabile per memorizzare il nome del Pokémon
-const pokemonName = ref('');
-// Variabile per memorizzare le statistiche del Pokémon
-const pokemonStats = ref(null);
+// Variabili di riferimento per memorizzare i dati del Pokémon e il messaggio di errore
+const search = ref(''); // Ricerca del Pokémon
+const errorMessage = ref(''); // Messaggio di errore, se presente
+const pokemonName = ref(''); // Nome del Pokémon
+const pokemonStats = ref(null); // Statistiche del Pokémon
+const pokemonTypes = ref([]); // Tipi del Pokémon
+const pokemonHeight = ref(0); // Altezza del Pokémon
+const pokemonWeight = ref(0); // Peso del Pokémon
 
+// Funzione per cercare un Pokémon
 const searchPokemon = async () => {
   try {
+    // Effettua una richiesta GET all'API di PokeAPI per ottenere i dati del Pokémon
     const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${search.value}`);
-    // Ottieni il nome del Pokémon dalla risposta
-    pokemonName.value = response.data.name;
-    // Ottieni le statistiche del Pokémon dalla risposta
-    pokemonStats.value = response.data.stats;
+    // Estrai i dati della risposta
+    const data = response.data; 
+    // Ottieni nome del Pokémon
+    pokemonName.value = data.name;
+    // Ottieni statistiche del Pokémon
+    pokemonStats.value = data.stats;
+    // Ottieni tipi del Pokémon
+    pokemonTypes.value = data.types.map(type => type.type.name);
+    // Ottieni altezza del Pokémon
+    pokemonHeight.value = data.height;
+    // Ottieni peso del Pokémon
+    pokemonWeight.value = data.weight;
     // Inizialmente vuoto
     errorMessage.value = ''; 
   } catch (error) {
@@ -25,27 +35,41 @@ const searchPokemon = async () => {
     // Se non viene trovato il Pokémon, reimposta i valori delle variabili
     pokemonName.value = '';
     pokemonStats.value = null;
+    pokemonTypes.value = [];
+    pokemonHeight.value = 0;
+    pokemonWeight.value = 0;
     // Messaggio di errore a schermo
-    errorMessage.value = 'Nessun Pokémon trovato.';
+    errorMessage.value = 'No Pokémon found, do another search.';
   }
 }; 
-
 </script>
 
 <template>
-  <div>
-    <input type="text" v-model="search" placeholder="Ricerca il Pokémon">
-    <button @click="searchPokemon">Search</button>
-    <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
-    <p v-if="pokemonName">Nome del Pokémon: {{ pokemonName }}</p>
-    <ul v-if="pokemonStats">
-      <li v-for="stat in pokemonStats" :key="stat.stat.name">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
-    </ul>
-  </div>
+    <div>
+        <!-- Input per inserire il nome del Pokémon da cercare -->
+        <input type="text" v-model="search" placeholder="Ricerca il Pokémon">
+        <!-- Bottone per avviare la ricerca -->
+        <button @click="searchPokemon">Search</button>
+        <!-- Messaggio di errore, se non esiste il Pokèmon -->
+        <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+        <!-- Mostra il nome  -->
+        <p v-if="pokemonName"> Name: {{ pokemonName }}</p>
+        <!-- Mostra i tipi  -->
+        <p v-if="pokemonTypes.length > 0"> Type: {{ pokemonTypes.join(', ') }}</p>   
+        <!-- Mostra l'altezza  -->
+        <p v-if="pokemonHeight"> Height: {{ pokemonHeight }}</p>
+        <!-- Mostra il peso -->
+        <p v-if="pokemonWeight"> Weight: {{ pokemonWeight }}</p>
+        <!-- Mostra le statistiche-->
+        <ul v-if="pokemonStats">
+            <li v-for="stat in pokemonStats" :key="stat.stat.name">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+        </ul>
+    </div>
 </template>
 
 <style scoped>
 
 </style>
+
 
 
