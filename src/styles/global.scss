@@ -1,0 +1,22 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+  }
+  
+  .col-4 {
+    flex-basis: calc(100%/12)*4;
+  }
+  
+  .col-8 {
+    flex-basis: calc(100%/12)*8;
+  }
+  
+  .col-6 {
+    flex-basis: calc(100%/12)*6;
+  }
+  
