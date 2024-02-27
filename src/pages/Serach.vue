@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 // Variabili di riferimento per memorizzare i dati del Pokémon e il messaggio di errore
 const search = ref(''); // Ricerca del Pokémon
@@ -55,7 +55,9 @@ const savePokemon = () => {
   };
   savedPokemon.value.push(newPokemon);
   console.log(savedPokemon.value);
-  emit ('pokemon-saved', newPokemon);
+  // Invia un evento personalizzato per notificare il nuovo Pokemon salvato
+  const event = new CustomEvent('pokemon-saved', { detail: newPokemon });
+  window.dispatchEvent(event);
 };
 
 </script>
