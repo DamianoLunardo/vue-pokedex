@@ -91,8 +91,12 @@ window.addEventListener('pokemon-selected', (event) => {
         <p v-if="pokemonWeight"> Weight: {{ pokemonWeight }}</p>
         <!-- Mostra le statistiche-->
         <ul v-if="pokemonStats">
-          Stats:
-            <li v-for="stat in pokemonStats" :key="stat.stat.name">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
+        Stats:
+          <li v-for="stat in pokemonStats" :key="stat.stat.name">
+            {{ stat.stat.name }}: {{ stat.base_stat }}
+            <!-- Progress bar per visualizzare il valore della statistica -->
+            <progress :value="stat.base_stat" max="100">{{ stat.base_stat }}%</progress>
+          </li>
         </ul>
     </div>
 </template>
