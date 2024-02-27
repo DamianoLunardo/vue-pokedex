@@ -72,36 +72,78 @@ window.addEventListener('pokemon-selected', (event) => {
 </script>
 
 <template>
-    <div>
+    <div class="maisc bg">
         <!-- Input per inserire il nome del Pokémon da cercare -->
-        <input type="text" v-model="search" placeholder="Ricerca il Pokémon">
-        <!-- Bottone per avviare la ricerca -->
-        <button @click="searchPokemon">Search</button>
-        <!-- Bottone per salvare il Pokèmon -->
-        <button @click="savePokemon">Save</button>
+        <input class="maisc personal-imput" type="text" v-model="search" placeholder="Ricerca il Pokémon">
+          <div class="d-button">
+            <div>
+            <!-- Bottone per avviare la ricerca --> 
+            <button class="maisc search" @click="searchPokemon">Search</button>
+            </div>
+            <div>
+            <!-- Bottone per salvare il Pokèmon -->
+            <button class="maisc save" @click="savePokemon">Save</button>  
+            </div>
+          </div>
         <!-- Messaggio di errore, se non esiste il Pokèmon -->
-        <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+        <p class="maisc" v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
         <!-- Mostra il nome  -->
-        <p v-if="pokemonName"> Name: {{ pokemonName }}</p>
+        <p class="maisc bold-text" v-if="pokemonName"> Name: {{ pokemonName }}</p>
         <!-- Mostra i tipi  -->
-        <p v-if="pokemonTypes.length > 0"> Type: {{ pokemonTypes.join(', ') }}</p>   
+        <p class="maisc bold-text" v-if="pokemonTypes.length > 0"> Type: {{ pokemonTypes.join(', ') }}</p>   
         <!-- Mostra l'altezza  -->
-        <p v-if="pokemonHeight"> Height: {{ pokemonHeight }}</p>
+        <p class="maisc bold-text" v-if="pokemonHeight"> Height: {{ pokemonHeight }}</p>
         <!-- Mostra il peso -->
-        <p v-if="pokemonWeight"> Weight: {{ pokemonWeight }}</p>
+        <p class="maisc bold-text" v-if="pokemonWeight"> Weight: {{ pokemonWeight }} lbs</p>
         <!-- Mostra le statistiche-->
-        <ul v-if="pokemonStats">
-        Stats:
-          <li v-for="stat in pokemonStats" :key="stat.stat.name">
+        <ul class="maisc stats" v-if="pokemonStats">
+        <span class="bold-text">Stats:</span>
+          <li class="maisc" v-for="stat in pokemonStats" :key="stat.stat.name">
             {{ stat.stat.name }}: {{ stat.base_stat }}
             <!-- Progress bar per visualizzare il valore della statistica -->
-            <progress :value="stat.base_stat" max="100">{{ stat.base_stat }}%</progress>
+            <progress class="fix-distance" :value="stat.base_stat" max="100">{{ stat.base_stat }}</progress>
           </li>
         </ul>
     </div>
 </template>
 
 <style lang="scss" scoped>
+@use '../styles/global.scss';
+
+.bg {
+  background-color: white;
+  padding: 20px;
+}
+
+.personal-imput {
+  width: 300px;
+  height: 30px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  line-height: 100px;
+  
+}
+
+.d-button {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+ 
+.fix-distance {
+  width: 100px;
+  height: 10px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.stats {
+  margin-top: 10px;
+}
+
+
 
 </style>
 

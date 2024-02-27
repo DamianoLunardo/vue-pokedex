@@ -37,19 +37,36 @@ const showPokemonDetail = (pokemon) => {
 </script>
 
 <template>
-  <div>
-    <h1>My Pokemon</h1>
+  <div class="personalize">
+    <h1 class="maisc">My Pokemon</h1>
     <!-- Mostra le informazioni sui Pokémon salvati -->
-    <div v-for="(pokemon, index) in savedPokemon" :key="index">
-      <div @click="showPokemonDetail(pokemon)">
-        <p> {{ pokemon.name }}</p>
-        <button @click.stop="removePokemon(index)">Remove</button>
+    <div class="maisc"  v-for="(pokemon, index) in savedPokemon" :key="index">
+      <div class="saved-pokemon" @click="showPokemonDetail(pokemon)">
+        <p class="maisc"> {{ pokemon.name }}</p>
+        <button class="remove" @click.stop="removePokemon(index)">Remove</button>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+@use '../styles/global.scss';
+.saved-pokemon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.personalize {
+    border: solid 2px white;
+    padding: 20px;
+    background-color: white;
+}
+
 </style>
 
 

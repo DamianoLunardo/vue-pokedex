@@ -1,5 +1,5 @@
 <script setup>
-import HelloWord from './components/Header.vue'
+import Header from './components/Header.vue'
 import SearchPart from './components/SearchPart.vue';
 
 </script>
@@ -12,7 +12,7 @@ export default {
 
 <template>
   <section class="container">
-    <HelloWord />
+    <Header />
     <SearchPart />  
   </section>
  
@@ -20,6 +20,13 @@ export default {
 </template>
 
 <style lang="scss">
-@use './styles/global.scss'
+@use './styles/global.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 </style>

@@ -8,10 +8,26 @@ import { ref } from 'vue'
 
 <template>
 
-<h1>Ciao mondo il progetto è settuppato</h1>
+<div class="container">
+    <img class="headerImg" src="../../public/header.png" />
+</div>
 
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../styles/global.scss';
+
+.headerImg {
+    width: 80%;
+    
+    object-fit: cover;
+    padding: 20px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+        width: 60%;
+    }
+    
+}
 
 </style>

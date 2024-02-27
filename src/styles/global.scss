@@ -1,7 +1,10 @@
+@import './partials/mixmins';
+
 * {
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -17,15 +20,38 @@ ul, li {
     display: flex;
   }
   
-  .col-4 {
-    flex-basis: calc(100%/12)*4;
-  }
-  
-  .col-8 {
-    flex-basis: calc(100%/12)*8;
-  }
-  
-  .col-6 {
+.col-6 {
     flex-basis: calc(100%/12)*6;
+    padding: 10px;
   }
+
+.maisc::first-letter {
+    text-transform: uppercase;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+button {
+  @include special
+}
+
+.search {
+  @include special;
+  background-color: rgb(75, 212, 212);
+  margin-right: 20px;
+}
+
+.save {
+  @include special;
+  background-color: green;
+}
+
+.remove {
+  @include special;
+  background-color: rgb(167, 14, 14);
+  color: white;
+}
+
   

@@ -1,0 +1,9 @@
+@mixin special {
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    border: solid 1px black;
+    font-weight: bold;
+    color: white;
+}
