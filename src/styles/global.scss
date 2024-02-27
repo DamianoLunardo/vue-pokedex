@@ -4,6 +4,15 @@
    box-sizing: border-box;
 }
 
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+ul, li {
+    list-style: none;
+}
+
 .row {
     display: flex;
   }
