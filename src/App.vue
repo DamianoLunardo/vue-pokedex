@@ -1,18 +1,21 @@
 <script setup>
-import HelloWord from './components/HelloWorld.vue'
+import HelloWord from './components/Header.vue'
 import SearchPart from './components/SearchPart.vue';
 
 </script>
 export default {
   components: {
-    HelloWorld,
+    Header,
     SearchPart
   }
 }
 
 <template>
- <HelloWord />
- <SearchPart />
+  <section class="container">
+    <HelloWord />
+    <SearchPart />  
+  </section>
+ 
   
 </template>
 
