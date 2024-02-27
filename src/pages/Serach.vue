@@ -82,6 +82,7 @@ const savePokemon = () => {
         <p v-if="pokemonWeight"> Weight: {{ pokemonWeight }}</p>
         <!-- Mostra le statistiche-->
         <ul v-if="pokemonStats">
+          Stats:
             <li v-for="stat in pokemonStats" :key="stat.stat.name">{{ stat.stat.name }}: {{ stat.base_stat }}</li>
         </ul>
     </div>
