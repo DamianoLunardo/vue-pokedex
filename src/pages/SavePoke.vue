@@ -19,35 +19,23 @@ const selectedPokemon = ref(null);
 
 // Funzione per impostare il Pokémon selezionato per visualizzare il dettaglio
 const showPokemonDetail = (pokemon) => {
-  selectedPokemon.value = pokemon;
+  const event = new CustomEvent('pokemon-selected', { detail: pokemon });
+  window.dispatchEvent(event);
 };
+
 </script>
 
 <template>
   <div>
-    <h1>Ciao</h1>
-    <!-- Mostra le informazioni sui Pokémon salvati -->
-    <div v-for="(pokemon, index) in savedPokemon" :key="index">
-      <div @click="showPokemonDetail(pokemon)">
-        <p>Name: {{ pokemon.name }}</p>
-        <button @click.stop="removePokemon(index)">Remove</button>
-      </div>
+        <h1>Ciao</h1>
+        <!-- Mostra le informazioni sui Pokémon salvati -->
+        <div v-for="(pokemon, index) in savedPokemon" :key="index">
+        <div @click="showPokemonDetail(pokemon)">
+            <p>Name: {{ pokemon.name }}</p>
+            <button @click.stop="removePokemon(index)">Remove</button>
+        </div>
+        </div>
     </div>
-    <!-- Dettaglio del Pokémon selezionato -->
-    <div v-if="selectedPokemon">
-      <h2>Dettaglio del Pokémon</h2>
-      <p>Name: {{ selectedPokemon.name }}</p>
-      <p>Types: {{ selectedPokemon.types.join(', ') }}</p>
-      <p>Height: {{ selectedPokemon.height }}</p>
-      <p>Weight: {{ selectedPokemon.weight }}</p>
-      <p>Stats:</p>
-      <ul>
-        <li v-for="stat in selectedPokemon.stats" :key="stat.stat.name">
-          {{ stat.stat.name }}: {{ stat.base_stat }}
-        </li>
-      </ul>
-    </div>
-  </div>
 </template>
 
 <style lang="scss" scoped>
