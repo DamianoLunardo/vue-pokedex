@@ -60,6 +60,15 @@ const savePokemon = () => {
   window.dispatchEvent(event);
 };
 
+window.addEventListener('pokemon-selected', (event) => {
+  // Aggiorna i dettagli del Pokémon con i dati ricevuti dall'evento
+  pokemonName.value = event.detail.name;
+  pokemonTypes.value = event.detail.types;
+  pokemonHeight.value = event.detail.height;
+  pokemonWeight.value = event.detail.weight;
+  pokemonStats.value = event.detail.stats;
+});
+
 </script>
 
 <template>
