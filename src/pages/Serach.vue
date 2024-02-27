@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // Variabili di riferimento per memorizzare i dati del Pokémon e il messaggio di errore
 const search = ref(''); // Ricerca del Pokémon
@@ -10,6 +10,7 @@ const pokemonStats = ref(null); // Statistiche del Pokémon
 const pokemonTypes = ref([]); // Tipi del Pokémon
 const pokemonHeight = ref(0); // Altezza del Pokémon
 const pokemonWeight = ref(0); // Peso del Pokémon
+const savedPokemon = ref([]); // Array per memorizzare i Pokémon salvati
 
 // Funzione per cercare un Pokémon
 const searchPokemon = async () => {
@@ -42,6 +43,21 @@ const searchPokemon = async () => {
     errorMessage.value = 'No Pokémon found, do another search.';
   }
 }; 
+
+// Funzione per salvare il Pokémon trovato, quindi nome stats ecc...
+const savePokemon = () => {
+  const newPokemon = {
+    name: pokemonName.value,
+    types: pokemonTypes.value,
+    height: pokemonHeight.value,
+    weight: pokemonWeight.value,
+    stats: pokemonStats.value
+  };
+  savedPokemon.value.push(newPokemon);
+  console.log(savedPokemon.value);
+  emit ('pokemon-saved', newPokemon);
+};
+
 </script>
 
 <template>
@@ -50,6 +66,8 @@ const searchPokemon = async () => {
         <input type="text" v-model="search" placeholder="Ricerca il Pokémon">
         <!-- Bottone per avviare la ricerca -->
         <button @click="searchPokemon">Search</button>
+        <!-- Bottone per salvare il Pokèmon -->
+        <button @click="savePokemon">Save</button>
         <!-- Messaggio di errore, se non esiste il Pokèmon -->
         <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
         <!-- Mostra il nome  -->
@@ -67,7 +85,7 @@ const searchPokemon = async () => {
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
 
